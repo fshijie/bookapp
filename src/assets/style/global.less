@@ -1,0 +1,120 @@
+@import "./variables.less";
+@import "./ui.less";
+
+/**
+ * 去除点击蓝边及遮罩区块
+ */
+div, span, p, button, a, i, section, header, footer, ul, ol, li {
+    outline: none !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+}
+
+// 字体
+body, pre {
+    font-family: Microsoft YaHei,Microsoft YaHei UI,ff-tisa-web-pro-1,ff-tisa-web-pro-2,Lucida Grande,Helvetica Neue,Helvetica,Arial,Hiragino Sans GB,Hiragino Sans GB W3,WenQuanYi Micro Hei,SimHei,sans-serif!important;
+}
+
+pre {
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+.ex-query {
+    border-radius: 8px;
+    // padding: 20px;
+
+    &__title {
+        display: flex;
+        justify-content: space-between;
+
+        &-text {
+            color: @color-text;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+    }
+    &__query {
+        display: flex;
+        // justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 15px;
+
+        &-filter {
+            display: flex;
+            flex-wrap: wrap;
+
+            >div {
+                margin-right: 8px;
+            }
+            @media screen and (max-width: 768px) {
+                margin-right: 8px;
+            }
+
+            &.wrap >div {
+                margin-bottom: 5px;
+            }
+        }
+        &-btn {
+            // margin-left: 5px;
+        }
+    }
+    &__table {
+        margin-bottom: 15px;
+        border-radius: 2px;
+        thead th {
+            color: @color-text;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+    &__page {
+        text-align: right;
+    }
+}
+
+.ex-text-primary {
+    color: @color-primary;
+}
+.ex-font-bold {
+    font-weight: bold;
+}
+.ex-table-view-btn {
+    text-decoration: underline;
+}
+
+/**
+ * 自定义滚动条
+ */
+/*---滚动条默认显示样式--*/
+::-webkit-scrollbar-thumb {
+    background-color: #dadada;
+    border-radius: 3px;
+}
+
+/*---鼠标点击滚动条显示样式--*/
+::-webkit-scrollbar-thumb:hover {
+    background-color: #c8c8c8;
+}
+
+/*---滚动条大小--*/
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+/*---滚动框背景样式--*/
+::-webkit-scrollbar-track-piece {
+    background-color: alpha(#e4e4e4, 5%) ;
+}
+/*首页输入框修改为灰色背景*/
+.date-box  .el-input__inner{
+    background:#F1F1F1 !important;
+}
+.input-box  .el-input__inner{
+    background:#F1F1F1 !important;
+}

@@ -1,36 +1,38 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Role from '@/view/list'
-import RoleList from '@/view/role/index'
-import areaList from '@/view/role/index'
-import Login from '@/view/login'
 Vue.use(Router);
 
 export default new Router({
   routes: [
     {
       path: '/',
-      component: Role,
-      children:[
-        {
-          path: 'role/index',
-          component: RoleList,
-        }
-        ]
+      name:'home',
+      component: () => import('@/view/home/index')
+    },
+    {
+      path: '/book',
+      name:'book',
+      component: () => import('@/view/book/index'),
+    },
+    {
+      path: '/book/outline',
+      name:'outline',
+      component: () => import('@/view/book/outline/index'),
     },
     {
       path: '/Role',
-      component: Role,
+      component: () => import('@/view/list'),
       children:[
         {
           path: 'area/index',
-          component: areaList,
+          component: () => import('@/view/list'),
         }
       ]
     },
+
     {
       path: '/Login',
-      component: Login,
+      component: () => import('@/view/login'),
     }
   ]
 })
