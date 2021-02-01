@@ -6,11 +6,11 @@
           <div>简介</div>
         </div></el-col
       >
-      <el-col :span="16" style="background:#ccc;height:80vh"
+      <el-col :span="16" style="background: #ccc; height: 80vh"
         ><div class="grid-content bg-purple-light">
           <div>
             简介：
-            <div>
+            <div class="text-xl">
               一个网文写手带领大家发家致富的过程。
               网文写手小云朵穿越了。家里有个瘦瘦弱弱的弟弟，颤颤巍巍的奶奶，父亲去参加修河道，摔断了腿，奶奶哭瞎了眼睛。母亲现在还怀着一个孩子。瘦得皮包骨头。
               二叔家每天从家里扣扣搜一点送到家里来接济，泼辣的二嫂立马就冲了上来。
@@ -36,36 +36,55 @@
         <el-button
           @click="drawer = true"
           type="primary"
-          style="margin-left: 16px;"
+          style="margin-left: 16px"
         >
-          创建人物
+          人物设计
         </el-button>
 
         <div></div>
         <div></div>
       </el-col>
     </el-row>
-    <el-drawer title="添加人物" :visible.sync="drawer" :with-header="false">
+    <el-drawer
+      title="添加人物"
+      :visible.sync="drawer"
+      :with-header="false"
+      size="800px"
+    >
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="角色列表" name="first">
-          <el-card>
+          <el-card v-for="(item, index) in roleList" :key="index">
             <el-row>
               <el-col :span="4">
-                <el-avatar
-                  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-                ></el-avatar>
-                小云朵
+                <img style="width: 100%; height: 100%" :src="item.img" />
               </el-col>
               <el-col :span="20"
-                ><div class="grid-content bg-purple-light" @click="showDetail">
-                  姓名：小云朵
-                  简介：小云朵是一个网文写手，一次意外，令她穿越到了一个叫做晋国的大陆，在这里一家人穷的无比
-                </div>
+                ><div class="grid-content bg-purple-light">
+                  姓名：{{ item.name }}
+                  <i
+                    @click="showDetail"
+                    class="el-icon-video-play"
+                    style="font-size: 24px; color: blue"
+                  ></i>
 
-                <i
-                  class="el-icon-video-play"
-                  style="font-size:24px;color:blue"
-                ></i>
+                  <el-tag>主角</el-tag>
+                  <div>
+                    性别：
+                    <span v-if="item.sex === 1">男</span>
+                    <span v-if="item.sex === 2">女</span>
+                  </div>
+                  <div>
+                    重要标志：
+                    <el-tag
+                      v-for="(data, index) in item.tag"
+                      :key="index"
+                      type="success"
+                      >{{ data }}</el-tag
+                    >
+                  </div>
+                  简介：{{ item.info }}
+                  <div>重要目标：{{ item.target }}</div>
+                </div>
               </el-col>
             </el-row>
           </el-card>
@@ -75,7 +94,7 @@
             ref="form"
             :model="form"
             label-width="80px"
-            style="margin-top:20px;"
+            style="margin-top: 20px"
           >
             <el-form-item label="姓名">
               <el-input v-model="form.name"></el-input>
@@ -95,6 +114,15 @@
                 <el-option label="区域二" value="beijing"></el-option>
               </el-select>
             </el-form-item>
+            <el-tag>活泼</el-tag>
+            <el-tag type="success">热情</el-tag>
+            <el-tag type="info">腿部残疾</el-tag>
+            <el-tag type="warning">笑起来好看</el-tag>
+            <el-tag type="danger">勤奋</el-tag>
+            <el-form-item label="重要标签">
+              <el-input v-model="form.name" style="width: 100px"></el-input
+              ><i class="el-icon-circle-plus-outline"></i>
+            </el-form-item>
             <el-form-item label="人物简介">
               <el-input type="textarea" v-model="form.desc"></el-input>
             </el-form-item>
@@ -110,111 +138,52 @@
         >
       </el-tabs>
     </el-drawer>
-    <el-dialog
-      title="角色信息"
-      :visible.sync="dialogVisible"
-      width="80%"
-    >
-
-                <el-avatar
-                  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-                ></el-avatar>
-<el-tabs :tab-position="tabPosition" style="height: 200px;">
-    <el-tab-pane label="简介">
-         <div>小云朵</div>
-        <div>
-             性别：
+    <el-dialog title="角色信息" :visible.sync="dialogVisible" width="80%">
+      <el-avatar
+        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+      ></el-avatar>
+      <el-tabs :tab-position="tabPosition" style="height: 200px">
+        <el-tab-pane label="简介">
+          <div>小云朵</div>
+          <div>
+            性别：
             <el-radio-group v-model="info.sex">
-    <el-radio :label="1">男</el-radio>
-    <el-radio :label="2">女</el-radio>
-    </el-radio-group>
-    年龄：12
-    代表图片，代表图参考
-    总体描写
-    身高:
-    体重：
-    体态：羸弱
-    气质：偏清秀，
-    性格：沉闷
-    细节描写：头部，
-容貌
-头发：发黄，细软，干枯
-    额头：额头饱满
-    眉毛：眉毛清淡，如细柳
-    眼：
-    耳：小巧
-    口：樱桃小口，嘴唇浅淡，偏薄，有点干到起皮
-    鼻：修挺，
-    肤色：蜡黄。
-    身子：
-    脖子：纤长白皙
-    肩部：瘦小，偏窄
-    双臂：胳膊纤细柔弱
-    左手：手指纤长，上面有一层茧，颜色黄色
-    右手：是指头上有一些疤痕
-    胸部：还没发育完全，略微隆起
-    脊背：广阔，平坦
-    腰部：腰部纤细
-    臀部：干瘪
-    双腿：细长
-    双脚：小巧，穿三十五码的鞋子，约XXX尺
-    所属时代：
-    <el-radio-group v-model="info.sex">
-    <el-radio :label="1">现代</el-radio>
-    <el-radio :label="2">古代</el-radio>
-  </el-radio-group>
-    具体朝代：
-    <el-radio-group v-model="info.sex">
-    <el-radio :label="1">汉朝</el-radio>
-    <el-radio :label="2">清朝</el-radio>
-  </el-radio-group>
+              <el-radio :label="1">男</el-radio>
+              <el-radio :label="2">女</el-radio>
+            </el-radio-group>
+            年龄：12 代表图片，代表图参考 总体描写 身高: 体重： 体态：羸弱
+            气质：偏清秀， 性格：沉闷 细节描写：头部， 容貌
+            头发：发黄，细软，干枯 额头：额头饱满 眉毛：眉毛清淡，如细柳 眼：
+            耳：小巧 口：樱桃小口，嘴唇浅淡，偏薄，有点干到起皮 鼻：修挺，
+            肤色：蜡黄。 身子： 脖子：纤长白皙 肩部：瘦小，偏窄
+            双臂：胳膊纤细柔弱 左手：手指纤长，上面有一层茧，颜色黄色
+            右手：是指头上有一些疤痕 胸部：还没发育完全，略微隆起
+            脊背：广阔，平坦 腰部：腰部纤细 臀部：干瘪 双腿：细长
+            双脚：小巧，穿三十五码的鞋子，约XXX尺 所属时代：
+            <el-radio-group v-model="info.sex">
+              <el-radio :label="1">现代</el-radio>
+              <el-radio :label="2">古代</el-radio>
+            </el-radio-group>
+            具体朝代：
+            <el-radio-group v-model="info.sex">
+              <el-radio :label="1">汉朝</el-radio>
+              <el-radio :label="2">清朝</el-radio>
+            </el-radio-group>
 
-<div>
-    穿着：
-    配饰
-    头上：用红绳绑了两个辫子
-    耳朵：
-    妆容：
-    脖子：
-    手链，手镯，臂钏
-    戒指，扳指
-    腰部：香囊，玉佩，皮带
-    服饰：
-    上衣服：
-    内衣
-    中衣
-    外套：
-    披风
-    大鳖
-    裤子，裙子
-    鞋子
-
-    性格：
-    活泼
-    三观
-
-    金钱
-    房产
-    属于什么势力
-    等级
-
-
-
-
-
-</div>
-
-
-        </div>
-
-    </el-tab-pane>
-    <el-tab-pane label="人物初始属性">
-        <div>小云朵</div>
-
+            <div>
+              穿着： 配饰 头上：用红绳绑了两个辫子 耳朵： 妆容： 脖子：
+              手链，手镯，臂钏 戒指，扳指 腰部：香囊，玉佩，皮带 服饰： 上衣服：
+              内衣 中衣 外套： 披风 大鳖 裤子，裙子 鞋子 性格： 活泼 三观 金钱
+              房产 属于什么势力 等级
+            </div>
+          </div>
         </el-tab-pane>
-    <el-tab-pane label="人物小传">角色管理</el-tab-pane>
-    <el-tab-pane label="人物关系">定时任务补偿</el-tab-pane>
-  </el-tabs>
+        <el-tab-pane label="人物初始属性">
+          <div>小云朵</div>
+        </el-tab-pane>
+        <el-tab-pane label="人物小传">角色管理</el-tab-pane>
+        <el-tab-pane label="人物关系">定时任务补偿</el-tab-pane>
+      </el-tabs>
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
@@ -226,6 +195,7 @@
   </div>
 </template>
 <script>
+import roleList from "./role";
 export default {
   name: "MainIndex",
   data() {
@@ -233,13 +203,13 @@ export default {
       mobileMenuShow: false,
       dialogVisible: false,
       drawer: false,
+      roleList,
       form: {},
-       tabPosition: 'left',
+      tabPosition: "left",
       activeName: "first",
-      info:{
-          sex:2
-      }
-
+      info: {
+        sex: 2,
+      },
     };
   },
   watch: {},
@@ -253,11 +223,11 @@ export default {
     },
     showDetail() {
       this.dialogVisible = true;
-    }
+    },
   },
   created() {
     // this.sendHeartbeat();
-  }
+  },
 };
 </script>
 

@@ -21,7 +21,7 @@
             <i title="全屏切换" @click="fullscreen" class="el-icon-full-screen right__full-btn"></i>
             <el-dropdown>
                 <span class="el-dropdown-link">
-                    <img class="avatar" src="~@/assets/images/default-avatar.png" />
+                    <!-- <img class="avatar" src="~@/assets/images/default-avatar.png" /> -->
                 </span>
                 <el-dropdown-menu slot="dropdown">
                     <!-- <el-dropdown-item @click.native="handleUpdateUser('info')">修改用户信息</el-dropdown-item> -->

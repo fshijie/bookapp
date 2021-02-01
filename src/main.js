@@ -9,6 +9,8 @@ import less from 'less'
 import * as Utils from '@/utils';
 Vue.use(less)
 import * as api from '@/api';
+//样式
+import '@/assets/style/utility.less';
 Vue.use(ElementUI);
 Vue.prototype.$auth = {
   check: Utils.authCheck
