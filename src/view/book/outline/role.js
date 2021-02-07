@@ -20,6 +20,7 @@ export default [
         sex: 1,
         age: 15,
         area: '李家村',
+        cate: 2,//1主角，2 配角 3炮灰 4反派 
         img: require('@/assets/img/yingyu.jpg'),
         tag: ['腿部残疾', '开朗', '热情', '坚强'],
         info: '何小云是一个网文写手，一次意外，令她穿越到了一个叫做晋国的大陆，成了一个名叫小云朵的女孩子',
@@ -30,6 +31,19 @@ export default [
         name: '小云朵',
         sex: 1,
         age: 15,
+        cate: 2,//1主角，2 配角 3炮灰 4反派 
+        area: '李家村',
+        img: require('@/assets/img/yingyu.jpg'),
+        tag: ['腿部残疾', '开朗', '热情', '坚强'],
+        info: '何小云是一个网文写手，一次意外，令她穿越到了一个叫做晋国的大陆，成了一个名叫小云朵的女孩子',
+        target: '在古代成立一家名字叫做夜阑的文学书院，引领女性的独立，丰富普通人的精神世界'
+
+    },
+    {
+        name: '小云朵',
+        sex: 1,
+        age: 15,
+        cate: 3,//1主角，2 配角 3炮灰 4反派 
         area: '李家村',
         img: require('@/assets/img/yingyu.jpg'),
         tag: ['腿部残疾', '开朗', '热情', '坚强'],
